@@ -1,0 +1,10 @@
+@font-face {
+  font-family: Jockey;
+  src: url("../src/assets/fonts/JockeyOne-Regular.ttf");
+}
+@import "tailwindcss";
+
+@theme {
+  --font-jockey: Jockey, "sans-serif";
+  --color-buttonbg: #d7dfcb;
+}

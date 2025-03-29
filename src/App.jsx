@@ -1,9 +1,7 @@
+import Home from "./home/Home";
+
 const App = () => {
-  return (
-    <>
-      <h1>Hello react</h1>
-    </>
-  );
+  return <Home />;
 };
 
 export default App;
