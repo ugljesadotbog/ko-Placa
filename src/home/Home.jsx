@@ -1,29 +1,18 @@
-import { useState } from "react";
 import Button from "../components/Button";
 
-const Main = () => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
+const Home = ({ buttonText, className, onClick, currentStep }) => {
   return (
-    <main
-      className={`h-screen flex items-center justify-center flex-col ${
-        isClicked ? "hidden" : ""
-      }`}
-    >
-      <h1 className="mb-12 text-center font-jockey text-6xl">
+    <div className="h-screen flex items-center justify-center flex-col">
+      <h1 className="mb-12 text-center font-jockey text-6xl tracking-wider">
         Ko <br></br>Plaća?
       </h1>
       <Button
-        buttonText={"START"}
-        className={`${isClicked ? "hidden" : ""}`}
-        onClick={handleClick}
+        buttonText={buttonText}
+        className={`px-6 py-2`}
+        onClick={onClick}
       />
-    </main>
+    </div>
   );
 };
 
-export default Main;
+export default Home;
