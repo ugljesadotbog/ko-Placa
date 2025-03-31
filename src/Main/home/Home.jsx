@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 const Home = ({ buttonText, className, onClick, currentStep }) => {
   return (

@@ -1,10 +1,13 @@
-import Button from "../components/Button";
-import { useState } from "react";
-import Input from "../components/Input";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
-const Person = ({ className, onClick, currentStep, personCount, setPersonCount }) => {
-  
-
+const Person = ({
+  className,
+  onClick,
+  currentStep,
+  personCount,
+  setPersonCount,
+}) => {
   const handleInputChange = (event) => {
     setPersonCount(event.target.value);
   };

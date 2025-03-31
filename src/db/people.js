@@ -1,1 +1,1 @@
-export const people = ["micko"];
+export const people = [];

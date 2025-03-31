@@ -1,12 +1,19 @@
-import Home from "./home/Home";
+import Home from "./Main/home/Home";
 import "./index.css";
-import Names from "./Names/Names";
-import Person from "./Person/Person";
+import Names from "./Main/Names/Names";
+import Person from "./Main/Person/Person";
+import Bill from "./Main/Bill/Bill";
+import AI from "./Main/AI/AI";
 import { useState } from "react";
+import { people } from "./db/people";
+import Footer from "./Footer/Footer";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState("home");
   const [personCount, setPersonCount] = useState("");
+  const [billCount, setBillCount] = useState("");
+  const [osobe, setOsobe] = useState([...people]);
+  const [numOfPeople, setNumOfPeople] = useState(people.length);
 
   const goToPersonStep = () => {
     setCurrentStep("person");
@@ -16,39 +23,79 @@ const App = () => {
     setCurrentStep("names");
   };
 
+  const goToBillsStep = () => {
+    setCurrentStep("bills");
+  };
+
   const goToFinalStep = () => {
     setCurrentStep("final");
   };
 
-  return (
-    <main>
-      {currentStep === "home" && (
-        <Home
-          buttonText={"START"}
-          className=""
-          onClick={goToPersonStep}
-          currentStep={currentStep}
-        />
-      )}
-      {currentStep === "person" && (
-        <Person
-          className=""
-          onClick={goToNamesStep}
-          currentStep={currentStep}
-          personCount={personCount}
-          setPersonCount={setPersonCount}
-        />
-      )}
+  const goToAIStep = () => {
+    setCurrentStep("ai");
+  };
 
-      {currentStep === "names" && (
-        <Names
-          className=""
-          onClick={goToFinalStep}
-          currentStep={currentStep}
-          personCount={personCount}
-        />
-      )}
-    </main>
+  return (
+    <>
+      <main>
+        {currentStep === "home" && (
+          <Home
+            buttonText={"START"}
+            className=""
+            onClick={goToPersonStep}
+            currentStep={currentStep}
+          />
+        )}
+        {currentStep === "person" && (
+          <Person
+            className=""
+            onClick={goToBillsStep}
+            currentStep={currentStep}
+            personCount={personCount}
+            setPersonCount={setPersonCount}
+          />
+        )}
+
+        {currentStep === "bills" && (
+          <Bill
+            className=""
+            onClick={goToNamesStep}
+            currentStep={currentStep}
+            billCount={billCount}
+            setBillCount={setBillCount}
+          />
+        )}
+
+        {currentStep === "names" && (
+          <Names
+            className=""
+            onClick={goToAIStep}
+            currentStep={currentStep}
+            personCount={personCount}
+            osobe={osobe}
+            setOsobe={setOsobe}
+            people={people}
+            numOfPeople={numOfPeople}
+            setNumOfPeople={setNumOfPeople}
+          />
+        )}
+
+        {currentStep === "ai" && (
+          <AI
+            className=""
+            currentStep={currentStep}
+            personCount={personCount}
+            billCount={billCount}
+            osobe={osobe}
+            people={people}
+            numOfPeople={numOfPeople}
+          />
+        )}
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </>
   );
 };
 
