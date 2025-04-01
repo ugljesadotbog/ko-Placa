@@ -36,7 +36,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="app-container">
       <main>
         {currentStep === "home" && (
           <Home
@@ -92,10 +92,10 @@ const App = () => {
           />
         )}
       </main>
-      <footer>
+      <footer className="absolute bottom-0 w-full">
         <Footer />
       </footer>
-    </>
+    </div>
   );
 };
 

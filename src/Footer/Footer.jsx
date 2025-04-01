@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className=" flex items-center justify-around bg-gray-100 pt-1.25 text-center">
+    <div className="flex items-center justify-around bg-gray-100 pt-1.25 text-center">
       <p className="font-light text-sm">
         &copy; <a href="https://www.instagram.com/ugljeesaaa">ugljeesaa</a>{" "}
         2025.
