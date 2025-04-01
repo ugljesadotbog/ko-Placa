@@ -21,7 +21,7 @@ const AI = ({ osobe, people, numOfPeople, billCount }) => {
               .map((osoba) => `${osoba.name} ima ${osoba.money} dinara`)
               .join(
                 ", "
-              )}, potrebno je podeliti trošak računa od ${billCount} dinara. Račun mora biti u potpunosti izmiren, a višak (kusur) raspodeljen tako da se realizuju samo direktne transakcije između osoba, bez korišćenja procentualnih proračuna – isključivo krupni iznosi. Rezultat treba da bude jasan i precizan, u formatu: "Račun: [iznos]. [Osoba A] duguje [iznos] [Osoba B]", i slično, pri čemu se koristi samo jedna mogućnost raspodele koja je humane i praktična. Odgovor takodje mora biti bez bilo kakvog boldiranja, iskljucivo u plain formatu.`,
+              )}, potrebno je podeliti trošak računa od ${billCount} dinara. Račun mora biti u potpunosti izmiren, a višak (kusur) raspodeljen tako da se realizuju samo direktne transakcije između osoba, bez korišćenja procentualnih proračuna – isključivo krupni iznosi. Rezultat treba da bude jasan i precizan, u formatu: "Račun: [iznos]. [Osoba A] duguje [iznos] [Osoba B]", i slično, pri čemu se koristi samo jedna mogućnost raspodele koja je humane i praktična`,
           },
         ],
       });
