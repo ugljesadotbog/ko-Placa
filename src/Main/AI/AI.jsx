@@ -9,24 +9,27 @@ const AI = ({ osobe, people, numOfPeople, billCount }) => {
   const [responseText, setResponseText] = useState("");
 
   async function main() {
-    const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
     setLoading(true);
     try {
-      const response = await model.generateContent([
-        {
-          text: `Bazirano na ukupno ${
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [
+          `Bazirano na ukupno ${
             osobe.length
           } ljudi, gde su raspoloživi iznosi za svaku osobu dati na sledeći način: ${osobe
             .map((osoba) => `${osoba.name} ima ${osoba.money} dinara`)
             .join(
               ", "
             )}, potrebno je podeliti trošak računa od ${billCount} dinara...`,
-        },
-      ]);
+        ],
+      });
       setResponseText(response.text || "Greska pri dobijanju podataka");
     } catch (error) {
       console.error("Error generating content:", error);
-      setResponseText(error.message);
+      setResponseText(
+        error.message ||
+          "An unexpected error occurred while generating content."
+      );
     } finally {
       setLoading(false);
     }
