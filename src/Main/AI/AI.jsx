@@ -28,7 +28,7 @@ const AI = ({ osobe, people, numOfPeople, billCount }) => {
       setResponseText(response.text || "Greska pri dobijanju podataka");
     } catch (error) {
       console.error("Error generating content:", error);
-      setResponseText(error);
+      setResponseText(error.message);
     } finally {
       setLoading(false);
     }
