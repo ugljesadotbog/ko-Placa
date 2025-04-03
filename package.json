@@ -32,6 +32,8 @@
   "dependencies": {
     "@google/genai": "^0.7.0",
     "@google/generative-ai": "^0.24.0",
+    "@sentry/react": "^9.11.0",
+    "@sentry/vite-plugin": "^3.2.4",
     "@tailwindcss/cli": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
     "axios": "^1.8.4",
