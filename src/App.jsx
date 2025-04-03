@@ -7,6 +7,8 @@ import AI from "./Main/AI/AI";
 import { useState } from "react";
 import { people } from "./db/people";
 import Footer from "./Footer/Footer";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState("home");
@@ -100,6 +102,8 @@ const App = () => {
       <footer className="absolute bottom-0 w-full">
         <Footer />
       </footer>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 };
