@@ -9,22 +9,20 @@ const AI = ({ osobe, people, numOfPeople, billCount }) => {
   const [responseText, setResponseText] = useState("");
 
   async function main() {
+    const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
     setLoading(true);
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: [
-          {
-            text: `Bazirano na ukupno ${
-              osobe.length
-            } ljudi, gde su raspoloživi iznosi za svaku osobu dati na sledeći način: ${osobe
-              .map((osoba) => `${osoba.name} ima ${osoba.money} dinara`)
-              .join(
-                ", "
-              )}, potrebno je podeliti trošak računa od ${billCount} dinara. Račun mora biti u potpunosti izmiren, a višak (kusur) raspodeljen tako da se realizuju samo direktne transakcije između osoba, bez korišćenja procentualnih proračuna – isključivo krupni iznosi. Rezultat treba da bude jasan i precizan, u formatu: "Račun: [iznos]. [Osoba A] duguje [iznos] [Osoba B]", i slično, pri čemu se koristi samo jedna mogućnost raspodele koja je humane i praktična`,
-          },
-        ],
-      });
+      const response = await model.generateContent([
+        {
+          text: `Bazirano na ukupno ${
+            osobe.length
+          } ljudi, gde su raspoloživi iznosi za svaku osobu dati na sledeći način: ${osobe
+            .map((osoba) => `${osoba.name} ima ${osoba.money} dinara`)
+            .join(
+              ", "
+            )}, potrebno je podeliti trošak računa od ${billCount} dinara...`,
+        },
+      ]);
       setResponseText(response.text || "Greska pri dobijanju podataka");
     } catch (error) {
       console.error("Error generating content:", error);

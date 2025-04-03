@@ -90,14 +90,6 @@ const App = () => {
             numOfPeople={numOfPeople}
           />
         )}
-        <button
-          onClick={() => {
-            throw new Error("This is your first error!");
-          }}
-        >
-          Break the world
-        </button>
-        ;
       </main>
       <footer className="absolute bottom-0 w-full">
         <Footer />
