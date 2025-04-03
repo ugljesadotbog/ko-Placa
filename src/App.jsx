@@ -55,7 +55,6 @@ const App = () => {
             setPersonCount={setPersonCount}
           />
         )}
-
         {currentStep === "bills" && (
           <Bill
             className=""
@@ -65,7 +64,6 @@ const App = () => {
             setBillCount={setBillCount}
           />
         )}
-
         {currentStep === "names" && (
           <Names
             className=""
@@ -79,7 +77,6 @@ const App = () => {
             setNumOfPeople={setNumOfPeople}
           />
         )}
-
         {currentStep === "ai" && (
           <AI
             className=""
@@ -91,6 +88,14 @@ const App = () => {
             numOfPeople={numOfPeople}
           />
         )}
+        <button
+          onClick={() => {
+            throw new Error("This is your first error!");
+          }}
+        >
+          Break the world
+        </button>
+        ;
       </main>
       <footer className="absolute bottom-0 w-full">
         <Footer />
