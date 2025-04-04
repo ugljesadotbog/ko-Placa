@@ -16,7 +16,6 @@ const App = () => {
   const [billCount, setBillCount] = useState("");
   const [osobe, setOsobe] = useState([...people]);
   const [numOfPeople, setNumOfPeople] = useState(people.length);
-  
 
   const goToPersonStep = () => {
     setCurrentStep("person");
@@ -39,8 +38,8 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
-      <main>
+    <div className="flex flex-col min-h-screen app-container">
+      <main className="flex-grow">
         {currentStep === "home" && (
           <Home
             buttonText={"START"}
@@ -92,9 +91,8 @@ const App = () => {
           />
         )}
       </main>
-      <footer className="absolute bottom-0 w-full">
-        <Footer />
-      </footer>
+
+      <Footer />
       <Analytics />
       <SpeedInsights />
     </div>
