@@ -13,6 +13,7 @@ const Names = ({
 }) => {
   const [names, setNames] = useState("");
   const [money, setMoney] = useState("");
+  const [cost, setCost] = useState("");
 
   useEffect(() => {
     setNumOfPeople(osobe.length);
@@ -32,17 +33,23 @@ const Names = ({
     setMoney(event.target.value);
   };
 
+  const handleCostChange = (event) => {
+    setCost(event.target.value);
+  };
+
   const pushArray = () => {
     if (!names.trim()) return;
 
     const newPerson = {
       name: names,
       money: parseInt(money) || 0,
+      costOfItem: parseInt(money) || 0,
     };
 
     setOsobe((prevOsobe) => [...prevOsobe, newPerson]);
     setNames("");
     setMoney("");
+    setCost("");
   };
 
   return (
@@ -52,7 +59,7 @@ const Names = ({
           parseInt(personCount) <= osobe.length ? "hidden" : ""
         }`}
       >
-        <div className="flex flex-row justify-center items-center gap-4 my-3 ml-10">
+        <div className="flex flex-col lg:flex-row justify-center gap-4 items-center">
           <label
             htmlFor="names"
             className="flex flex-col items-center font-jockey"
@@ -64,13 +71,13 @@ const Names = ({
               placeholder=""
               value={names}
               onChange={handleInputChange}
-              className="mt-1"
+              className="mt-1 lg:w-auto"
             />
           </label>
 
           <label
             htmlFor="money"
-            className="flex flex-col items-center font-jockey text-base"
+            className="flex flex-col items-center font-jockey text-base lg:w-auto"
           >
             koliko novca ima?
             <Input
@@ -79,13 +86,27 @@ const Names = ({
               placeholder=""
               value={money}
               onChange={handleMoneyChange}
-              className="mt-1"
+              className="mt-1 lg:w-auto"
+            />
+          </label>
+          <label
+            htmlFor="cost"
+            className="flex flex-col items-center font-jockey text-base"
+          >
+            koliko kosta stvar?
+            <Input
+              name="cost"
+              type="text"
+              placeholder=""
+              value={cost}
+              onChange={handleCostChange}
+              className="mt-1 lg:w-auto"
             />
           </label>
 
           <Button
             buttonText="OK"
-            className="px-4 py-1 h-fit self-end mb-2"
+            className="px-4 py-1 h-fit mb-2"
             onClick={pushArray}
           />
         </div>

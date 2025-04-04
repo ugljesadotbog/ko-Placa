@@ -16,6 +16,7 @@ const App = () => {
   const [billCount, setBillCount] = useState("");
   const [osobe, setOsobe] = useState([...people]);
   const [numOfPeople, setNumOfPeople] = useState(people.length);
+  
 
   const goToPersonStep = () => {
     setCurrentStep("person");

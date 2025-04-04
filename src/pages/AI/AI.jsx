@@ -1,92 +1,66 @@
 import React, { useEffect, useState } from "react";
 
-const AI = ({ osobe, /* people, */ numOfPeople, billCount }) => {
+const AI = ({ osobe, numOfPeople, billCount }) => {
   const [loading, setLoading] = useState(false);
   const [responseText, setResponseText] = useState("");
 
-  async function fetchGeneration() {
-    // Preimenovano da bude jasnije
+  async function geminiAI() {
     setLoading(true);
+
     try {
-      const numericBillCount = Number(billCount);
-
-      if (isNaN(numericBillCount)) {
-        console.error("Vrednost za billCount nije validan broj:", billCount);
-        setResponseText("Greška: Iznos računa mora biti validan broj.");
-        setLoading(false);
-        return;
-      }
-
-      // Pozovi svoju backend API rutu
-      const response = await fetch("/api/generate", {
+      const res = await fetch("/api/gemini", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // Pošalji konvertovanu, numeričku vrednost
-        body: JSON.stringify({ osobe, billCount: numericBillCount }), // Koristi numericBillCount
+        body: JSON.stringify({
+          prompt: `Bazirano na ukupno ${
+            osobe.length
+          } ljudi, gde su raspoloživi iznosi za svaku osobu dati na sledeći način: ${osobe
+            .map(
+              (osoba) =>
+                `${osoba.name || "Osoba bez imena"} ima ${
+                  osoba.money == null
+                    ? "nepoznat iznos"
+                    : osoba.money + " dinara"
+                } i njegova stvar sa menija kosta ${osoba.costOfItem}`
+            )
+            .join(", ")},
+      potrebno je podeliti trošak računa od ${billCount} dinara.
+      Predloži konkretno ko koliko treba da plati da bi se račun pokrio, uzimajući u obzir koliko ko ima novca, koliko kosta njegova/njena stvar sa menija. Budi jasan i koncizan. Nije potrebno da se ravnomerno podeli novac, vec da se pronadje najoptimalnije resenje gde svako isplacuje svoj dug, i u zavisnosti od kusura mu se vraca novac.
+      Vrati samo tekstualni odgovor podele. Nemoj koristiti markdown formatiranje (npr. bez **, * ili #).`,
+        }),
       });
 
-      if (!response.ok) {
-        // Pokušaj da pročitaš telo greške sa servera ako postoji
-        let errorMsg = `HTTP greška! Status: ${response.status}`;
-        try {
-          const errorData = await response.json();
-          errorMsg = errorData.error || errorMsg; // Koristi poruku iz API rute ako postoji
-        } catch (e) {
-          // Nije uspelo čitanje JSON-a, koristi osnovnu poruku
-        }
-        throw new Error(errorMsg);
+      if (!res.ok) {
+        throw new Error(`Error ${res.status}`);
       }
 
-      // Dobij JSON odgovor od svoje API rute
-      const data = await response.json();
-      setResponseText(
-        data.responseText || "Greška pri dobijanju podataka sa servera."
-      );
+      const data = await res.json();
+      setResponseText(data.text);
     } catch (error) {
-      console.error("Greška pri pozivu /api/generate:", error);
-      setResponseText(
-        error.message ||
-          "Došlo je do neočekivane greške pri komunikaciji sa serverom."
-      );
+      console.error("Error: ", error);
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    if (osobe && osobe.length > 0 && billCount != null && billCount !== "") {
-      fetchGeneration();
-    } else {
-      if (
-        osobe &&
-        osobe.length > 0 &&
-        (billCount == null || billCount === "")
-      ) {
-        setResponseText("Unesite ukupan iznos računa.");
-      } else if (!osobe || osobe.length === 0) {
-        setResponseText("Nedostaju podaci o osobama.");
-      } else {
-        setResponseText("Nedostaju podaci za pokretanje AI analize.");
-      }
-      setLoading(false); // Osiguraj da nije loading ako nema podataka
+    if (osobe.length > 0 && billCount > 0) {
+      geminiAI();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [osobe, billCount]); // Zavisnosti ostaju iste
+  }, [osobe, billCount]);
 
   return (
     <div className="flex flex-col items-center h-screen justify-center">
       <p className="text-xl font-extralight mb-20 px-10 break-words w-full text-center">
         {" "}
-        {/* Dodato break-words i text-center */}
         {loading ? "Generisanje predloga podele..." : responseText}
+        {console.log("Šaljemo podatke:", JSON.stringify(osobe))}
       </p>
 
-      {/* Prikaz osoba ostaje isti */}
       <div className="flex flex-row gap-4 flex-wrap px-4 max-w-md mx-auto justify-center">
         {" "}
-        {/* Dodato justify-center */}
         {osobe.map((osoba, index) => (
           <div
             key={index}
