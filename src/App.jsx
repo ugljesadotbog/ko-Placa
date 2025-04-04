@@ -1,9 +1,9 @@
-import Home from "./Main/home/Home";
+import Home from "./pages/home/Home";
 import "./index.css";
-import Names from "./Main/Names/Names";
-import Person from "./Main/Person/Person";
-import Bill from "./Main/Bill/Bill";
-import AI from "./Main/AI/AI";
+import Names from "./pages/Names/Names";
+import Person from "./pages/Person/Person";
+import Bill from "./pages/Bill/Bill";
+import AI from "./pages/AI/AI";
 import { useState } from "react";
 import { people } from "./db/people";
 import Footer from "./Footer/Footer";

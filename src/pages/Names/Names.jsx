@@ -37,7 +37,7 @@ const Names = ({
 
     const newPerson = {
       name: names,
-      money: money || "0",
+      money: parseInt(money) || 0,
     };
 
     setOsobe((prevOsobe) => [...prevOsobe, newPerson]);
