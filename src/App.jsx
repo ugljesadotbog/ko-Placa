@@ -17,25 +17,33 @@ const App = () => {
   const [osobe, setOsobe] = useState([...people]);
   const [numOfPeople, setNumOfPeople] = useState(people.length);
 
+  const steps = ["person", "names", "bills", "final", "ai"];
+
   const goToPersonStep = () => {
-    setCurrentStep("person");
+    setCurrentStep(steps[0]);
   };
 
   const goToNamesStep = () => {
-    setCurrentStep("names");
+    setCurrentStep(steps[1]);
   };
 
   const goToBillsStep = () => {
-    setCurrentStep("bills");
+    setCurrentStep(steps[2]);
   };
 
   const goToFinalStep = () => {
-    setCurrentStep("final");
+    setCurrentStep(steps[3]);
   };
 
   const goToAIStep = () => {
-    setCurrentStep("ai");
+    setCurrentStep(steps[4]);
   };
+
+  const goToPrevious = (step) => {
+    if(steps.includes(step)) {
+      setCurrentStep(step)
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-screen app-container">
