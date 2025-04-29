@@ -9,6 +9,7 @@ import { people } from "./db/people";
 import Footer from "./Footer/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import BackButton from "./components/BackButton";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState("home");
@@ -17,37 +18,36 @@ const App = () => {
   const [osobe, setOsobe] = useState([...people]);
   const [numOfPeople, setNumOfPeople] = useState(people.length);
 
-  const steps = ["person", "names", "bills", "final", "ai"];
+  const steps = ["home", "person", "names", "bills", "final", "ai"];
 
   const goToPersonStep = () => {
-    setCurrentStep(steps[0]);
-  };
-
-  const goToNamesStep = () => {
     setCurrentStep(steps[1]);
   };
 
-  const goToBillsStep = () => {
+  const goToNamesStep = () => {
     setCurrentStep(steps[2]);
   };
 
-  const goToFinalStep = () => {
+  const goToBillsStep = () => {
     setCurrentStep(steps[3]);
   };
 
-  const goToAIStep = () => {
+  const goToFinalStep = () => {
     setCurrentStep(steps[4]);
   };
 
-  const goToPrevious = (step) => {
-    if(steps.includes(step)) {
-      setCurrentStep(step)
-    }
-  }
+  const goToAIStep = () => {
+    setCurrentStep(steps[5]);
+  };
+
 
   return (
     <div className="flex flex-col min-h-screen app-container">
       <main className="flex-grow">
+        <BackButton steps={steps} 
+        setCurrentStep={setCurrentStep} 
+        currentStep={currentStep}/>
+
         {currentStep === "home" && (
           <Home
             buttonText={"START"}
@@ -60,7 +60,7 @@ const App = () => {
           <Person
             className=""
             onClick={goToBillsStep}
-            currentStep={currentStep}
+            currentStep={steps[0]}
             personCount={personCount}
             setPersonCount={setPersonCount}
           />

@@ -1,5 +1,8 @@
+import BackButton from "../../components/BackButton";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+
+
 
 const Person = ({
   className,
@@ -7,6 +10,7 @@ const Person = ({
   currentStep,
   personCount,
   setPersonCount,
+  goToPrevious
 }) => {
   const handleInputChange = (event) => {
     setPersonCount(event.target.value);
@@ -27,6 +31,7 @@ const Person = ({
         className={`px-6 py-1 mt-6 ${className}`}
         onClick={onClick}
       />
+     <BackButton/>
     </div>
   );
 };

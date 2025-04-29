@@ -1,6 +1,6 @@
 import Button from "../../components/Button";
 
-const Home = ({ buttonText, className, onClick, currentStep }) => {
+const Home = ({ buttonText, className, onClick, currentStep, goToPrevious }) => {
   return (
     <div className="h-screen flex items-center justify-center flex-col">
       <h1 className="mb-12 text-center font-jockey text-6xl tracking-wider">
