@@ -4,12 +4,14 @@ const BackButton = ({ steps, currentStep, setCurrentStep }) => {
   
   const goToPrevious = () => {
     const currentIndex = steps.indexOf(currentStep);
-    if (currentIndex > 0) {
+    if (currentIndex >= 0) {
       setCurrentStep(steps[currentIndex - 1]);
     }
+
+
     console.log(`currentIndex: ${currentIndex}`)
     console.log(`step: ${currentStep}`)
-    console.log(`stepBefore: ${currentIndex-1}`)
+    console.log(`stepBefore: ${steps[currentIndex-1]}`)
     console.log(steps[0])
   };
 

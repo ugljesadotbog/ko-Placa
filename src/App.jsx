@@ -20,25 +20,32 @@ const App = () => {
 
   const steps = ["home", "person", "names", "bills", "final", "ai"];
 
-  const goToPersonStep = () => {
-    setCurrentStep(steps[1]);
-  };
+  const goToNextStep = () => {
+    const currentIndex = steps.indexOf(currentStep);
+    if(currentIndex < steps.length - 1) {
+      setCurrentStep(steps[currentIndex + 1])
+    }
+  }
 
-  const goToNamesStep = () => {
-    setCurrentStep(steps[2]);
-  };
+  // const goToPersonStep = () => {
+  //   setCurrentStep(steps[1]);
+  // };
 
-  const goToBillsStep = () => {
-    setCurrentStep(steps[3]);
-  };
+  // const goToNamesStep = () => {
+  //   setCurrentStep(steps[2]);
+  // };
 
-  const goToFinalStep = () => {
-    setCurrentStep(steps[4]);
-  };
+  // const goToBillsStep = () => {
+  //   setCurrentStep(steps[3]);
+  // };
 
-  const goToAIStep = () => {
-    setCurrentStep(steps[5]);
-  };
+  // const goToFinalStep = () => {
+  //   setCurrentStep(steps[4]);
+  // };
+
+  // const goToAIStep = () => {
+  //   setCurrentStep(steps[5]);
+  // };
 
 
   return (
@@ -51,15 +58,15 @@ const App = () => {
         {currentStep === "home" && (
           <Home
             buttonText={"START"}
-            className=""
-            onClick={goToPersonStep}
+            className={steps[0]}
+            onClick={goToNextStep}
             currentStep={currentStep}
           />
         )}
         {currentStep === "person" && (
           <Person
             className=""
-            onClick={goToBillsStep}
+            onClick={goToNextStep}
             currentStep={steps[0]}
             personCount={personCount}
             setPersonCount={setPersonCount}
@@ -68,7 +75,7 @@ const App = () => {
         {currentStep === "bills" && (
           <Bill
             className=""
-            onClick={goToNamesStep}
+            onClick={goToNextStep}
             currentStep={currentStep}
             billCount={billCount}
             setBillCount={setBillCount}
@@ -77,7 +84,7 @@ const App = () => {
         {currentStep === "names" && (
           <Names
             className=""
-            onClick={goToAIStep}
+            onClick={goToNextStep}
             currentStep={currentStep}
             personCount={personCount}
             osobe={osobe}
